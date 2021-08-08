@@ -11,9 +11,10 @@ class Client {
 
     async checkToken(api) {
         fetch(`https://api.mkcomputing.uk/auth/token/validate/${api}`).then(res => res.text()).then(body => {
-            this.tokenChecked = true;
+            if(body.body.valid === true) this.tokenValid = true;
             this.tokenStatus = body;
         });
+       return this.tokenValid;
     }
 
     async serverStatus() {
